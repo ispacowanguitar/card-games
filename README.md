@@ -1,3 +1,3 @@
 # card-games
 
-This is a collection of card games written to run in the terminal. 
+This is a collection of card games designed to run in the terminal. 
