@@ -8,7 +8,7 @@ class Card
 end
 
 class Deck
-  RANKS = %w(1 2 3 4 5 6 7 8 9 J Q K A)
+  RANKS = %w(2 3 4 5 6 7 8 9 10 J Q K A)
   SUITS = %w(spade heart club diamond)
 
   attr_accessor :cards
@@ -23,11 +23,12 @@ class Deck
   end
 end
 
-deck = Deck.new
-
-deck.cards.each do |card|
-  puts "#{card.rank} #{card.suit}"
+RANKS = %w(2 3 4 5 6 7 8 9 10 J Q K A)
+RANK_VALUE = Hash.new
+RANKS.each_with_index do |rank, index|
+  RANK_VALUE[rank] = index + 2
 end
-
-random_card = deck.cards[rand(deck.cards.length - 1)]
-p "RANDOM CARD: #{random_card.rank} #{random_card.suit}"
+RANK_VALUE["A"] = 1
+RANK_VALUE["J"] = 10
+RANK_VALUE["Q"] = 10
+RANK_VALUE["K"] = 10
