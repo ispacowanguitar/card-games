@@ -34,11 +34,16 @@ until total >= 21 || response == "st"
     if response == "h"
       cards_drawn << deck.cards.pop
       cards_drawn.each {|card| p "#{card.rank} of #{card.suit}"}
+      total = sum(cards_drawn)
     elsif response == "st"
       puts "your total score is #{total}"
     end
-  elsif total > 21
-    puts "BUST!"
   end
+end
+
+if total > 21
+  puts "BUST! #{sum(cards_drawn)}"
+elsif total == 21
+  puts "NAILED IT!"
 end
 
