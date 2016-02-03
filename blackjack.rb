@@ -10,23 +10,35 @@ cards_drawn = deck.cards.pop(2)
 puts "PLAYER 1's TURN"
 cards_drawn.each {|card| p "#{card.rank} of #{card.suit}"}
 
-total = 0
-cards_drawn.each do |card|
-  total += RANK_VALUE[card.rank]
-end
-
-if total < 21
-  if RANK_VALUE[cards_drawn[0].rank] == RANK_VALUE[cards_drawn[1].rank]
-    puts "Would you like to hit(h), stay(st) or split(sp)?"
-  else
-    puts "Would you like to hit(h) or stay(st)?"
+def sum(cards_drawn)
+  total = 0
+  cards_drawn.each do |card|
+    total += RANK_VALUE[card.rank]
   end
-  response = gets.chomp
-elsif total > 21
-  puts "BUST!"
+  total
 end
 
-if response == "h"
-  cards_drawn << deck.cards.pop
-  cards_drawn.each {|card| p "#{card.rank} of #{card.suit}"}
+total = 0
+total = sum(cards_drawn)
+response = ""
+until total >= 21 || response == "st"
+
+
+  if total < 21
+    if RANK_VALUE[cards_drawn[cards_drawn.length - 2].rank] == RANK_VALUE[cards_drawn[cards_drawn.length - 1].rank]
+      puts "Would you like to hit(h), stay(st) or split(sp)?"
+    else
+      puts "Would you like to hit(h) or stay(st)?"
+    end
+    response = gets.chomp
+    if response == "h"
+      cards_drawn << deck.cards.pop
+      cards_drawn.each {|card| p "#{card.rank} of #{card.suit}"}
+    elsif response == "st"
+      puts "your total score is #{total}"
+    end
+  elsif total > 21
+    puts "BUST!"
+  end
 end
+
